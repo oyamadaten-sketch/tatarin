@@ -117,6 +117,17 @@
             50% { opacity: 0.5; }
         }
 
+        /* ▼▼ 処理落ち対策：GPUアクセラレーションの強制 ▼▼ */
+        .mix-blend-screen, .mix-blend-overlay, .animate-burn-particle, 
+        .animate-explosion-debris, .animate-explosion-fireball, 
+        .animate-shockwave, .animate-poison-cloud, .animate-fly-coin, 
+        .animate-shockwave-ring, .animate-explosion-glow, .animate-pop {
+            will-change: transform, opacity; /* 変化するプロパティを事前予告 */
+            -webkit-transform: translateZ(0); /* 3D空間に配置してGPUを強制起動 */
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+
         /* Scrollbar hide */
         ::-webkit-scrollbar { width: 0; background: transparent; }
         
